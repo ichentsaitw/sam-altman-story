@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sam Altman：矽谷最具爭議的樂觀主義者</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Playfair+Display:wght@700;900&display=swap');
+
+        :root {
+            --dark: #0a0a0a;
+            --off-white: #f5f2eb;
+            --accent: #c9a84c;
+            --accent-dim: #8a7234;
+            --gray: #6b6b6b;
+            --light-gray: #e0ddd6;
+            --card-bg: #ffffff;
+            --shadow: 0 2px 20px rgba(0,0,0,0.08);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background: var(--off-white);
+            color: var(--dark);
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        /* === HERO BANNER === */
+        .hero {
+            position: relative;
+            height: 85vh;
+            min-height: 600px;
+            overflow: hidden;
+            display: flex;
+            align-items: flex-end;
+        }
+
+        .hero-img {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            object-fit: cover;
+            object-position: center 20%;
+            filter: brightness(0.4) contrast(1.1);
+        }
+
+        .hero-overlay {
+            position: relative;
+            z-index: 2;
+            padding: 60px 8%;
+            width: 100%;
+            background: linear-gradient(transparent, rgba(0,0,0,0.85));
+        }
+
+        .hero-tag {
+            display: inline-block;
+            font-size: 0.75rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--accent);
+            border: 1px solid var(--accent);
+            padding: 6px 16px;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            color: white;
+            line-height: 1.15;
+            margin-bottom: 16px;
+            font-weight: 900;
+        }
+
+        .hero h1 span {
+            color: var(--accent);
+        }
+
+        .hero-sub {
+            color: rgba(255,255,255,0.7);
+            font-size: 1.1rem;
+            max-width: 600px;
+            font-weight: 300;
+        }
+
+        /* === NAV === */
+        .toc {
+            background: var(--dark);
+            padding: 20px 8%;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .toc a {
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            padding: 8px 16px;
+            border-radius: 4px;
+            white-space: nowrap;
+            transition: all 0.3s;
+            font-weight: 400;
+        }
+
+        .toc a:hover {
+            color: white;
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* === CONTENT === */
+        .content {
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* === SECTION === */
+        section {
+            padding: 80px 0 40px;
+        }
+
+        .section-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            color: var(--light-gray);
+            font-weight: 900;
+            line-height: 1;
+        }
+
+        .section-question {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 8px 0 12px;
+            line-height: 1.4;
+        }
+
+        .section-lead {
+            font-size: 1.05rem;
+            color: var(--gray);
+            border-left: 3px solid var(--accent);
+            padding-left: 16px;
+            margin-bottom: 36px;
+            font-weight: 400;
+        }
+
+        p { margin-bottom: 20px; font-size: 1rem; }
+
+        h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin: 36px 0 12px;
+            color: var(--dark);
+        }
+
+        /* === TIMELINE === */
+        .timeline {
+            position: relative;
+            padding-left: 28px;
+            margin: 30px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 6px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--light-gray);
+        }
+
+        .tl-item {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .tl-item::before {
+            content: '';
+            position: absolute;
+            left: -24px;
+            top: 10px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--accent);
+        }
+
+        .tl-item.highlight::before {
+            width: 14px;
+            height: 14px;
+            left: -26px;
+            top: 8px;
+            box-shadow: 0 0 0 4px rgba(201,168,76,0.2);
+        }
+
+        .tl-year {
+            font-weight: 700;
+            font-size: 0.85rem;
+            color: var(--accent-dim);
+            letter-spacing: 1px;
+        }
+
+        .tl-text {
+            font-size: 0.95rem;
+            color: var(--dark);
+        }
+
+        /* === CARD === */
+        .card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 28px;
+            margin: 24px 0;
+            box-shadow: var(--shadow);
+        }
+
+        .card-title {
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--accent);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        /* === COMPARISON TABLE === */
+        .compare-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0;
+            font-size: 0.9rem;
+        }
+
+        .compare-table th {
+            background: var(--dark);
+            color: white;
+            padding: 12px 16px;
+            text-align: left;
+            font-weight: 500;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+
+        .compare-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .compare-table tr:nth-child(even) td {
+            background: rgba(0,0,0,0.02);
+        }
+
+        /* === QUOTE === */
+        .quote {
+            position: relative;
+            padding: 24px 28px;
+            margin: 28px 0;
+            background: var(--dark);
+            color: white;
+            border-radius: 8px;
+            font-size: 1.05rem;
+            font-weight: 400;
+            line-height: 1.7;
+        }
+
+        .quote::before {
+            content: '"';
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            color: var(--accent);
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            line-height: 1;
+        }
+
+        .quote-src {
+            display: block;
+            margin-top: 12px;
+            font-size: 0.8rem;
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        /* === VERDICT === */
+        .verdict {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 24px 0;
+        }
+
+        .verdict-col {
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .verdict-col.pro {
+            background: #e8f5e9;
+            border: 1px solid #c8e6c9;
+        }
+
+        .verdict-col.con {
+            background: #fce4ec;
+            border: 1px solid #f8bbd0;
+        }
+
+        .verdict-col h4 {
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .verdict-col.pro h4 { color: #2e7d32; }
+        .verdict-col.con h4 { color: #c62828; }
+
+        .verdict-col li {
+            font-size: 0.9rem;
+            margin-bottom: 6px;
+            margin-left: 16px;
+        }
+
+        /* === SOURCE LINK === */
+        .src {
+            font-size: 0.75rem;
+            color: var(--gray);
+            word-break: break-all;
+        }
+
+        .src a {
+            color: var(--accent-dim);
+            text-decoration: none;
+        }
+
+        .src a:hover { text-decoration: underline; }
+
+        /* === FOOTER === */
+        footer {
+            text-align: center;
+            padding: 60px 24px;
+            font-size: 0.8rem;
+            color: var(--gray);
+            border-top: 1px solid var(--light-gray);
+            margin-top: 40px;
+        }
+
+        footer a { color: var(--accent-dim); }
+
+        /* === INVESTMENT DIAGRAM === */
+        .invest-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .invest-item {
+            background: var(--card-bg);
+            border: 1px solid var(--light-gray);
+            border-radius: 8px;
+            padding: 16px;
+        }
+
+        .invest-item strong {
+            display: block;
+            font-size: 0.95rem;
+            margin-bottom: 4px;
+        }
+
+        .invest-item .relation {
+            font-size: 0.8rem;
+            color: #c62828;
+            font-weight: 500;
+        }
+
+        .invest-item .detail {
+            font-size: 0.85rem;
+            color: var(--gray);
+            margin-top: 4px;
+        }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 640px) {
+            .hero { height: 70vh; min-height: 480px; }
+            .hero-overlay { padding: 40px 6%; }
+            .toc { padding: 12px 4%; }
+            section { padding: 60px 0 30px; }
+            .section-num { font-size: 3rem; }
+            .section-question { font-size: 1.4rem; }
+            .verdict { grid-template-columns: 1fr; }
+            .invest-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+    <img class="hero-img" src="sam_altman.jpg" alt="Sam Altman at TechCrunch Disrupt SF 2019. Photo: Steve Jennings/Getty Images for TechCrunch, CC BY 2.0">
+    <div class="hero-overlay">
+        <div class="hero-tag">閱讀輔助 ／ The Optimist by Keach Hagey</div>
+        <h1>Sam Altman<br><span>矽谷最具爭議的樂觀主義者</span></h1>
+        <p class="hero-sub">他不是最厲害的工程師，也不是最成功的創業者——但他成為了 AI 時代最有權力的人。這是怎麼辦到的？</p>
+    </div>
+</header>
+
+<!-- TOC -->
+<nav class="toc">
+    <a href="#origin">他是誰</a>
+    <a href="#loopt">第一次創業</a>
+    <a href="#yc">權力之路</a>
+    <a href="#openai">OpenAI</a>
+    <a href="#character">人品爭議</a>
+    <a href="#money">賺錢的藝術</a>
+    <a href="#rivals">對手們</a>
+    <a href="#takeaway">啟示</a>
+</nav>
+
+<div class="content">
+
+<!-- ===== 1. ORIGIN ===== -->
+<section id="origin">
+    <div class="section-num">01</div>
+    <h2 class="section-question">一個中產家庭的小孩，怎麼走到 AI 帝國的頂端？</h2>
+    <p class="section-lead">Sam Altman 不是天才神童，也不是含著金湯匙出生。但他很早就知道自己想要什麼。</p>
+
+    <div class="timeline">
+        <div class="tl-item">
+            <div class="tl-year">1985</div>
+            <div class="tl-text">出生於芝加哥，猶太家庭。媽媽是皮膚科醫師，爸爸是房地產經紀人。在聖路易長大。</div>
+        </div>
+        <div class="tl-item">
+            <div class="tl-year">8 歲</div>
+            <div class="tl-text">收到第一台 Apple Macintosh，開始自學寫程式、拆硬體。</div>
+        </div>
+        <div class="tl-item">
+            <div class="tl-year">高中</div>
+            <div class="tl-text">就讀聖路易私立名校 John Burroughs School。17 歲公開出櫃。</div>
+        </div>
+        <div class="tl-item highlight">
+            <div class="tl-year">~2003</div>
+            <div class="tl-text">進入 Stanford 大學念 Computer Science。當時錄取率約 12-13%（今天是 3.6%，難了 3.5 倍）。</div>
+        </div>
+        <div class="tl-item highlight">
+            <div class="tl-year">2005（19 歲）</div>
+            <div class="tl-text">從 Stanford 輟學。他說打撲克牌學到的比上課多。</div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-title"><span class="card-icon">?</span> 值得想的問題</div>
+        <p style="margin:0">和 Zuckerberg（Harvard 輟學創 Facebook）、Bill Gates（Harvard 輟學創 Microsoft）一樣，Altman 也走了「名校輟學」路線。但有個關鍵差異：Zuck 和 Gates 輟學時，公司已經爆發了。<strong>Altman 輟學時，Loopt 還只是個想法。</strong>他是先模仿成功者的姿態，再等成功追上來。</p>
+    </div>
+</section>
+
+<!-- ===== 2. LOOPT ===== -->
+<section id="loopt">
+    <div class="section-num">02</div>
+    <h2 class="section-question">第一次創業失敗了，為什麼反而成為他崛起的起點？</h2>
+    <p class="section-lead">Loopt 是一個位置分享的社交 app，比 Foursquare 更早。技術方向對了，但使用者就是不來。</p>
+
+    <div class="timeline">
+        <div class="tl-item highlight">
+            <div class="tl-year">2005</div>
+            <div class="tl-text">19 歲與 Stanford 同學創辦 <strong>Loopt</strong>。入選 Y Combinator 史上第一屆，同屆有 Reddit。</div>
+        </div>
+        <div class="tl-item">
+            <div class="tl-year">2005-2012</div>
+            <div class="tl-text">募了超過 3000 萬美元（來自 Sequoia Capital 等頂級創投），但用戶始終做不起來。</div>
+        </div>
+        <div class="tl-item highlight">
+            <div class="tl-year">2012</div>
+            <div class="tl-text">以 4300 萬美元賣給 Green Dot（預付卡公司）。這不是成功退場——是「沒有太丟臉地收場」。</div>
+        </div>
+    </div>
+
+    <h3>Green Dot 為什麼要買一個失敗的 app？</h3>
+    <p>這是典型的 <strong>acqui-hire</strong>（買人不買產品）。Green Dot 想進軍手機支付，買的是 Loopt 的 30 個工程師、行動開發能力和專利。Loopt 的產品買完就關掉了，團隊被拿去做手機銀行 GoBank。</p>
+    <p>4300 萬裡有 980 萬是員工留任獎金——進一步證明買的是人。</p>
+    <p>更關鍵的是：<strong>Sequoia Capital 同時是 Loopt 和 Green Dot 的投資人</strong>，等於自家人撮合，讓 Loopt 體面離場。</p>
+    <p class="src">來源：<a href="https://techcrunch.com/2012/03/09/loopt-acquired-by-green-dot/" target="_blank">TechCrunch — Loopt Acquired By Green Dot</a></p>
+
+    <div class="card">
+        <div class="card-title"><span class="card-icon">?</span> 值得想的問題</div>
+        <p style="margin:0">Loopt 募了 3000 萬，賣了 4300 萬。聽起來有賺？但扣掉投資人的優先清算權（他們先拿回本金），創辦人實際拿到的不會太多。<strong>矽谷的「成功」有時候只是包裝過的失敗。</strong></p>
+    </div>
+</section>
+
+<!-- ===== 3. YC ===== -->
+<section id="yc">
+    <div class="section-num">03</div>
+    <h2 class="section-question">創業沒成功的人，怎麼當上矽谷最大孵化器的老闆？</h2>
+    <p class="section-lead">答案不是技術，不是產品，而是——讓對的人相信你。</p>
+
+    <h3>Paul Graham 的青睞</h3>
+    <p>Y Combinator（YC）的創辦人 Paul Graham 很早就注意到 Altman——不是因為 Loopt 的成績，而是因為 Altman 這個人。</p>
+
+    <div class="quote">
+        你可以把他空投到一個食人族島上，五年後回來，他會是國王。
+        <span class="quote-src">—— Paul Graham，2008</span>
+    </div>
+
+    <p>2009 年，Graham 把 Altman 列為「史上最有趣的五位創辦人之一」，和 Steve Jobs、Larry Page 並列。<strong>注意：此時 Loopt 還在掙扎，還沒賣掉。</strong></p>
+
+    <div class="timeline">
+        <div class="tl-item">
+            <div class="tl-year">2011</div>
+            <div class="tl-text">從 YC 學員變成 YC 合夥人（兼職）——從「被投資的人」變成「投資別人的人」。</div>
+        </div>
+        <div class="tl-item highlight">
+            <div class="tl-year">2014（29 歲）</div>
+            <div class="tl-text">升任 <strong>YC 總裁</strong>。Graham 的理由：「我不擅長管理，YC 需要擴大，他是我唯一想到的完美人選。」</div>
+        </div>
+    </div>
+
+    <h3>Sequoia 與 YC：矽谷最強的投資流水線</h3>
+    <p>Sequoia Capital 和 YC 是獨立機構，但形成了共生關係：</p>
+    <p>YC 做種子輪（極早期篩選）→ Sequoia 做 Series A（加速成長）→ IPO。</p>
+    <p>Sequoia 是 YC 三家最大贏家的 Series A 投資人：Airbnb、Dropbox、Stripe。</p>
+
+    <div class="card">
+        <div class="card-title"><span class="card-icon">!</span> 權力的交叉口</div>
+        <p style="margin:0">當上 YC 總裁後，Altman 掌握了矽谷最大的新創入口。同時他自己還有一個基金（Hydrazine Capital，和弟弟一起開的）。他既是裁判，又是球員，還認識所有觀眾。這就是為什麼他能累積超過 <strong>400 家公司</strong>的投資組合——不是因為眼光特別好，而是因為<strong>他坐在資訊和權力的交叉口</strong>。</p>
+    </div>
+
+    <p class="src">來源：<a href="https://techcrunch.com/2009/03/16/y-combinator-gets-the-sequoia-capital-seal-of-approval/" target="_blank">TechCrunch — YC Gets Sequoia Seal of Approval</a>　|　<a href="https://techcrunch.com/2014/02/21/sam-altman-taking-over-as-president-of-y-combinator-replacing-paul-graham-at-the-helm/" target="_blank">TechCrunch — Altman Takes Over YC</a></p>
+</section>
+
+<!-- ===== 4. OPENAI ===== -->
+<section id="openai">
+    <div class="section-num">04</div>
+    <h2 class="section-question">一個非營利組織，怎麼變成估值一兆美元的公司？</h2>
+    <p class="section-lead">OpenAI 的故事，就是理想主義逐步讓位給商業現實的故事。</p>
+
+    <div class="timeline">
+        <div class="tl-item highlight">
+            <div class="tl-year">2015/12</div>
+            <div class="tl-text">Altman 與 Elon Musk 等人共同創辦 OpenAI，<strong>非營利組織</strong>。初始資金 10 億美元。使命：確保 AI 造福全人類。</div>
+        </div>
+        <div class="tl-item">
+            <div class="tl-year">2018</div>
+            <div class="tl-text">Musk 退出董事會（理由：與 Tesla 利益衝突）。兩人關係開始惡化。</div>
+        </div>
+        <div class="tl-item highlight">
+            <div class="tl-year">2019</div>
+            <div class="tl-text">Altman 離開 YC，全職做 OpenAI CEO。同年創建<strong>營利子公司</strong>——因為訓練 AI 太燒錢，非營利架構撐不住。</div>
+        </div>
+        <div class="tl-item">
+            <div class="tl-year">2022/11</div>
+            <div class="tl-text">ChatGPT 上線，<strong>爆紅</strong>。</div>
+        </div>
+        <div class="tl-item">
+            <div class="tl-year">2023/01</div>
+            <div class="tl-text">Microsoft 投資約 130 億美元。</div>
+        </div>
+        <div class="tl-item highlight">
+            <div class="tl-year">2023/11</div>
+            <div class="tl-text">被自己的董事會開除——<strong>五天後復職</strong>。開除他的董事反而被換掉。</div>
+        </div>
+        <div class="tl-item highlight">
+            <div class="tl-year">2025/10</div>
+            <div class="tl-text">完成轉型為<strong>公益公司（PBC）</strong>。非營利 OpenAI → OpenAI Foundation（持 26% 股份）+ OpenAI Group（營利實體）。</div>
+        </div>
+        <div class="tl-item">
+            <div class="tl-year">2026/03</div>
+            <div class="tl-text">估值 7300 億美元，準備 IPO。使命宣言中悄悄刪除了「safely」這個字。</div>
+        </div>
+    </div>
+
+    <h3>什麼是 PBC（公益公司）？</h3>
+    <table class="compare-table">
+        <tr>
+            <th></th>
+            <th>非營利 501(c)(3)</th>
+            <th>PBC 公益公司</th>
+            <th>一般 C-Corp</th>
+        </tr>
+        <tr>
+            <td><strong>能賺錢分紅嗎</strong></td>
+            <td>不行</td>
+            <td>可以</td>
+            <td>可以</td>
+        </tr>
+        <tr>
+            <td><strong>有股東嗎</strong></td>
+            <td>沒有</td>
+            <td>有</td>
+            <td>有</td>
+        </tr>
+        <tr>
+            <td><strong>董事義務</strong></td>
+            <td>服務公益使命</td>
+            <td>兼顧股東+公益</td>
+            <td>最大化股東價值</td>
+        </tr>
+        <tr>
+            <td><strong>稅</strong></td>
+            <td>免稅</td>
+            <td>正常繳</td>
+            <td>正常繳</td>
+        </tr>
+    </table>
+    <p>簡單說：PBC 可以賺錢、可以 IPO、可以分紅，但章程寫了「也要顧公益」。批評者認為這個「也要顧」在實務上很難執行——掛了好聽的招牌，實際上就是營利公司。</p>
+
+    <p class="src">來源：<a href="https://techcrunch.com/2025/10/28/openai-completes-its-for-profit-recapitalization/" target="_blank">TechCrunch — OpenAI Completes For-Profit Recapitalization</a>　|　<a href="https://theconversation.com/openai-has-deleted-the-word-safely-from-its-mission-and-its-new-structure-is-a-test-for-whether-ai-serves-society-or-shareholders-274467" target="_blank">The Conversation — OpenAI Deleted "Safely"</a></p>
+</section>
+
+<!-- ===== 5. CHARACTER ===== -->
+<section id="character">
+    <div class="section-num">05</div>
+    <h2 class="section-question">他是好人嗎？書裡怎麼說他的人品？</h2>
+    <p class="section-lead">《The Optimist》的作者是華爾街日報記者 Keach Hagey。書中的 Altman 不是英雄，也不是壞人，而是一個極度複雜的人。</p>
+
+    <div class="verdict">
+        <div class="verdict-col pro">
+            <h4>正面評價</h4>
+            <ul>
+                <li>極度聰明，人脈經營能力驚人</li>
+                <li>YC 同事：「他有道德感，會努力做對的事」</li>
+                <li>2023 年被開除時，員工幾乎全站他這邊（威脅集體離職）</li>
+            </ul>
+        </div>
+        <div class="verdict-col con">
+            <h4>負面評價</h4>
+            <ul>
+                <li>同一位同事：「迴避衝突、溝通不佳、動作太快經常破壞信任」</li>
+                <li>被描述為「從不留下完整證據，但有欺騙和操控的習慣」</li>
+                <li>多次未揭露家人在 YC 投資新創的利益關係</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="quote">
+        他的才能更接近「宗教領袖」而非技術人才。
+        <span class="quote-src">—— Tim Wu，紐約時報書評</span>
+    </div>
+
+    <h3>2023 年政變的真相</h3>
+    <p>外界一般以為是獨立董事要開除 Altman，但書中揭露：<strong>真正發起的是 CTO Mira Murati 和首席科學家 Ilya Sutskever</strong>——OpenAI 自己的技術核心。</p>
+    <p>然而 Altman 在五天內就翻盤了。開除他的人反而被換掉。這說明了兩件事：第一，他確實有讓身邊高層不信任的行為模式；第二，他的權力網絡大到可以在五天內逆轉一切。</p>
+
+    <h3>離開 YC 的真相</h3>
+    <p>Paul Graham 說 Altman 是自願離開的。但華盛頓郵報報導 Graham 曾中斷海外行程，專程回來「請他走」。YC 創辦人 Jessica Livingston 因為 Altman 把精力花在 OpenAI 而非 YC，據報多年不跟他說話。</p>
+
+    <p class="src">來源：<a href="https://www.transformernews.ai/p/book-review-the-optimist-and-empire" target="_blank">Transformer News — Book Review: The Optimist</a>　|　<a href="https://techcrunch.com/2024/05/30/paul-graham-claims-altman-wasnt-fired-from-y-combinator/" target="_blank">TechCrunch — Paul Graham Claims Altman Wasn't Fired</a>　|　<a href="https://fortune.com/2023/11/21/who-is-sam-altman-openai-career-microsoft-background-y-combinator-loopt-stanford/" target="_blank">Fortune — Who Is Sam Altman</a></p>
+</section>
+
+<!-- ===== 6. MONEY ===== -->
+<section id="money">
+    <div class="section-num">06</div>
+    <h2 class="section-question">他怎麼賺錢？合法但道德上有爭議的操作</h2>
+    <p class="section-lead">Altman 的財富不是來自 OpenAI 的薪水。他的個人投資組合超過 400 家公司，價值約 28 億美元。問題是：很多公司和 OpenAI 有生意往來。</p>
+
+    <h3>利益衝突地圖</h3>
+    <div class="invest-grid">
+        <div class="invest-item">
+            <strong>Helion Energy（核融合）</strong>
+            <div class="relation">→ OpenAI 潛在能源供應商</div>
+            <div class="detail">Altman 持股約 3.75 億美元。2026 年辭去董事以避嫌。</div>
+        </div>
+        <div class="invest-item">
+            <strong>Oklo（核能）</strong>
+            <div class="relation">→ OpenAI 潛在能源合作</div>
+            <div class="detail">2025 年辭去主席。</div>
+        </div>
+        <div class="invest-item">
+            <strong>Reddit</strong>
+            <div class="relation">→ 與 OpenAI 簽了資料授權協議</div>
+            <div class="detail">Altman 是 Reddit 最早期投資人。消息出來 Reddit 股價漲 13%。</div>
+        </div>
+        <div class="invest-item">
+            <strong>Rain AI（晶片新創）</strong>
+            <div class="relation">→ OpenAI 簽了 5100 萬採購意向</div>
+            <div class="detail">Altman 之前投了 Rain 的種子輪。</div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-title"><span class="card-icon">!</span> 這合法嗎？</div>
+        <p>合法。OpenAI 董事長 Bret Taylor 表示 Altman「始終遵守政策且對投資保持透明」。Altman 也陸續辭去了 Helion 和 Oklo 的董事職位以避嫌。</p>
+        <p style="margin:0"><strong>但道德上呢？</strong> 想像一下：你是一家公司的 CEO，你個人投資了供應商 A、資料來源 B、晶片商 C。然後你的公司跟 A、B、C 都簽了合約。每簽一筆，你個人的投資就增值。你沒有違法，但你創造了一個<strong>讓自己必然獲利的生態系</strong>。這就是 Altman 的手法——合法但讓人不舒服。</p>
+    </div>
+
+    <h3>生態系思維：現代版洛克斐勒</h3>
+    <p>Altman 的策略不是傳統的「做一家公司賺一筆錢」。他的邏輯是：</p>
+    <p><strong>坐在資訊和權力的交叉口 → 投資 AI 生態系的每一個環節 → 當 AI 爆發時，整個生態系都在幫你賺錢。</strong></p>
+    <p>在 YC 時期，他既是裁判（決定誰進 YC）又是球員（用自己的基金投 YC 公司）。在 OpenAI 時期，他個人投資的公司成為 OpenAI 的供應商。這不是一般的投資——這是<strong>建造一整條自己控制的產業鏈</strong>。</p>
+
+    <p class="src">來源：<a href="https://qz.com/openai-ceo-sam-altman-investments-2-8-billion-reddit-st-1851515945" target="_blank">Quartz — Altman's $2.8B Portfolio</a>　|　<a href="https://www.cbinsights.com/research/report/sam-altman-investments/" target="_blank">CB Insights — Sam Altman's Investment Web</a></p>
+</section>
+
+<!-- ===== 7. RIVALS ===== -->
+<section id="rivals">
+    <div class="section-num">07</div>
+    <h2 class="section-question">發動政變的人後來怎麼了？</h2>
+    <p class="section-lead">Ilya Sutskever 和 Mira Murati 在 2023 年聯手試圖推翻 Altman，失敗後各自走上截然不同的路。三個人的對比，說明了 AI 產業最深層的張力。</p>
+
+    <h3>Ilya Sutskever——AI 的良心</h3>
+    <p>Sutskever 是 Geoffrey Hinton（AI 教父、2024 諾貝爾物理獎得主）的學生。他在多倫多大學炸薯條打工時去敲了 Hinton 的門，要求加入實驗室。Hinton 給他一篇論文，一週後 Sutskever 不只看懂了，還指出一個改進方向——那個改進科學家花了好幾年才發現。</p>
+    <p>他是 AlexNet 的共同開發者（引爆深度學習革命），也是 GPT 系列模型背後的技術核心。離開 OpenAI 後，他創辦了 <strong>SSI（Safe Superintelligence Inc.）</strong>，只有約 20 人，沒有產品，沒有收入，但估值<strong> 320 億美元</strong>——光靠他的名字。</p>
+    <p class="src">來源：<a href="https://techcrunch.com/2025/04/12/openai-co-founder-ilya-sutskevers-safe-superintelligence-reportedly-valued-at-32b/" target="_blank">TechCrunch — SSI Valued at $32B</a>　|　<a href="https://officechai.com/stories/how-ilya-sutskever-had-impressed-geoffrey-hinton-as-a-student/" target="_blank">OfficeChai — How Sutskever Impressed Hinton</a></p>
+
+    <h3>Mira Murati——工程指揮官</h3>
+    <p>阿爾巴尼亞裔，曾在 Tesla 和 Leap Motion 工作。在 OpenAI 主導了 ChatGPT 和 DALL-E 的開發。政變失敗後她選擇留下（跟 Sutskever 不同），直到 2024 年 9 月才離開。</p>
+    <p>2025 年創辦 <strong>Thinking Machines Lab</strong>，募了 20 億種子輪。但到了 2026 年初，五位共同創辦人中有三位離開（其中一位因「不道德行為」被開除後被 OpenAI 接走）——留人比募資更難。</p>
+    <p class="src">來源：<a href="https://techcrunch.com/2026/01/14/mira-muratis-startup-thinking-machines-lab-is-losing-two-of-its-co-founders-to-openai/" target="_blank">TechCrunch — Thinking Machines Losing Co-founders</a></p>
+
+    <h3>三人比較</h3>
+    <table class="compare-table">
+        <tr>
+            <th></th>
+            <th>Altman</th>
+            <th>Sutskever</th>
+            <th>Murati</th>
+        </tr>
+        <tr>
+            <td><strong>核心能力</strong></td>
+            <td>人脈經營、說服力</td>
+            <td>純技術直覺</td>
+            <td>工程執行力</td>
+        </tr>
+        <tr>
+            <td><strong>政變後</strong></td>
+            <td>5 天復職，權力更大</td>
+            <td>道歉，尷尬離場</td>
+            <td>留下，隔年再走</td>
+        </tr>
+        <tr>
+            <td><strong>現在</strong></td>
+            <td>OpenAI CEO，準備 IPO</td>
+            <td>SSI，專注安全超級智慧</td>
+            <td>Thinking Machines，團隊動盪</td>
+        </tr>
+        <tr>
+            <td><strong>對 AI 安全</strong></td>
+            <td>嘴上重視，但刪了 "safely"</td>
+            <td>用整間公司押注安全</td>
+            <td>中間立場</td>
+        </tr>
+        <tr>
+            <td><strong>募資</strong></td>
+            <td>頂級</td>
+            <td>頂級（沒產品也募 30 億）</td>
+            <td>很強但留人有困難</td>
+        </tr>
+    </table>
+
+    <div class="quote">
+        Hinton 在 2024 年獲得諾貝爾物理獎時，公開表示支持 Sutskever 開除 Altman 的決定。AI 教父直接站在 Altman 的對立面。
+        <span class="quote-src">來源：<a href="https://lifeboat.com/ex/guardian2023" target="_blank" style="color:var(--accent)">Lifeboat Foundation Guardian Award 2023</a></span>
+    </div>
+</section>
+
+<!-- ===== 8. TAKEAWAY ===== -->
+<section id="takeaway">
+    <div class="section-num">08</div>
+    <h2 class="section-question">所以，我們可以從 Sam Altman 身上學到什麼？</h2>
+    <p class="section-lead">不是要崇拜他，也不是要否定他。而是理解：在這個時代，什麼樣的人能走到權力的頂端？</p>
+
+    <div class="card">
+        <div class="card-title"><span class="card-icon">1</span> 第一次失敗不代表結束</div>
+        <p style="margin:0">Loopt 失敗了，但他從中得到了 YC 的人脈、創業的經驗、和 Paul Graham 的認可。有時候「不太成功」比「完全沒做」更有價值。</p>
+    </div>
+
+    <div class="card">
+        <div class="card-title"><span class="card-icon">2</span> 人脈可以比技術更強大</div>
+        <p style="margin:0">Altman 不是最好的工程師（Sutskever 才是），也不是最好的產品經理（Murati 才是）。但他說服了 Paul Graham 給他 YC、說服了 Microsoft 投 130 億、說服了員工在他被開除時威脅集體離職。<strong>讓別人相信你，本身就是一種能力。</strong></p>
+    </div>
+
+    <div class="card">
+        <div class="card-title"><span class="card-icon">3</span> 合法不等於道德</div>
+        <p style="margin:0">投資你自己公司的供應商，然後讓公司跟供應商簽約。辭去董事席位「避嫌」，但股份還在手上。這些都不違法，但它們創造了一個<strong>你必然獲利的結構</strong>。認識這種手法很重要——不是要你學，而是要你看得懂。</p>
+    </div>
+
+    <div class="card">
+        <div class="card-title"><span class="card-icon">4</span> 理想和現實的拉扯</div>
+        <p style="margin:0">OpenAI 從「為全人類的非營利」變成「估值一兆的準 IPO 公司」。使命宣言裡的 "safely" 被悄悄刪掉。這不是一個人的選擇——這是當你需要幾十億美元來訓練 AI 時，幾乎必然會發生的事。<strong>大理想需要大錢，大錢會改變大理想。</strong></p>
+    </div>
+
+    <div class="card">
+        <div class="card-title"><span class="card-icon">5</span> 坐在對的位置，比做對的事更重要？</div>
+        <p style="margin:0">Altman 最關鍵的決定不是「做了什麼產品」，而是「坐上了什麼位置」——YC 總裁讓他成為矽谷的節點，OpenAI CEO 讓他成為 AI 時代的代言人。<strong>位置決定了你能看到什麼機會、認識什麼人、做出什麼選擇。</strong>這是值得思考的人生策略。</p>
+    </div>
+</section>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+    <p>本頁由 IC 與 Claude 於 2026 年 3 月 25 日共同整理，作為閱讀《The Optimist》的背景參考。</p>
+    <p>封面照片：Steve Jennings/Getty Images for TechCrunch，<a href="https://creativecommons.org/licenses/by/2.0/" target="_blank">CC BY 2.0</a>，經由 <a href="https://commons.wikimedia.org/wiki/File:Sam_Altman_TechCrunch_SF_2019_Day_2_Oct_3_(cropped_3).jpg" target="_blank">Wikimedia Commons</a></p>
+    <p>文字內容基於公開資料整理，來源已標註於各段落。</p>
+</footer>
+
+</body>
+</html>
